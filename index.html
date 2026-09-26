@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chime Bank</title>
+
+<style>
+
+/* =========================
+   BASIC SETTINGS
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    min-height: 100vh;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.75)
+        ),
+        url("IMG_4308.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* =========================
+   NOTICE
+========================= */
+
+.-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    background: #ffd000;
+    color: #111;
+
+    text-align: center;
+    padding: 7px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    z-index: 9999;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    margin-top: 32px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    font-weight: 400;
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+.menu-btn {
+    display: none;
+
+    background: none;
+    border: none;
+
+    color: white;
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    width: 90%;
+    max-width: 950px;
+
+    margin: auto;
+    padding: 70px 0;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.welcome p {
+    opacity: 0.65;
+    margin-bottom: 8px;
+}
+
+.welcome h1 {
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+.balance-card {
+    padding: 35px;
+
+    border-radius: 25px;
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+}
+
+.balance-card p {
+    opacity: 0.65;
+}
+
+.balance-card h2 {
+    font-size: 48px;
+    margin: 12px 0 35px;
+}
+
+.account-info {
+    display: flex;
+    gap: 80px;
+}
+
+.account-info small {
+    display: block;
+    opacity: 0.6;
+    margin-bottom: 6px;
+}
+
+.account-info strong {
+    font-size: 15px;
+}
+
+
+/* =========================
+   QUICK BUTTONS
+========================= */
+
+.quick-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.quick-actions button {
+    flex: 1;
+
+    padding: 20px;
+
+    border: none;
+    border-radius: 16px;
+
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+
+    cursor: pointer;
+    font-size: 15px;
+
+    backdrop-filter: blur(10px);
+}
+
+.quick-actions button:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.quick-actions span {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   WITHDRAWAL
+========================= */
+
+.withdraw-section {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.withdraw-card {
+    width: 100%;
+    max-width: 520px;
+
+    padding: 35px;
+
+    background: rgba(0,0,0,0.45);
+
+    backdrop-filter: blur(20px);
+
+    border-radius: 25px;
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,0.4);
+}
+
+.withdraw-card h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    opacity: 0.65;
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+label {
+    display: block;
+
+    margin: 18px 0 8px;
+
+    font-size: 13px;
+
+    opacity: 0.8;
+}
+
+input,
+select {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    border:
+        1px solid rgba(255,255,255,0.2);
+
+    background:
+        rgba(255,255,255,0.09);
+
+    color: white;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+select option {
+    color: black;
+}
+
+.amount-input {
+    display: flex;
+    align-items: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.09);
+
+    border:
+        1px solid rgba(255,255,255,0.2);
+}
+
+.amount-input span {
+    padding-left: 15px;
+    font-size: 18px;
+}
+
+.amount-input input {
+    border: none;
+    background: transparent;
+}
+
+.withdraw-btn {
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding: 16px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: white;
+    color: black;
+
+    font-weight: bold;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.withdraw-btn:hover {
+    transform: scale(1.01);
+}
+
+.security {
+    text-align: center;
+
+    font-size: 11px;
+
+    opacity: 0.5;
+
+    margin-top: 18px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,0.85);
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 5000;
+
+    padding: 20px;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 400px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background: #111;
+
+    border-radius: 25px;
+
+    border:
+        1px solid rgba(255,255,255,0.15);
+}
+
+.modal-box h2 {
+    margin: 20px 0 10px;
+}
+
+.modal-box p {
+    opacity: 0.7;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   LOADING ANIMATION
+========================= */
+
+.loader {
+    width: 55px;
+    height: 55px;
+
+    margin: auto;
+
+    border:
+        5px solid rgba(255,255,255,0.15);
+
+    border-top:
+        5px solid white;
+
+    border-radius: 50%;
+
+    animation:
+        spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   FAILED SCREEN
+========================= */
+
+.error-icon {
+    width: 65px;
+    height: 65px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #d93025;
+
+    font-size: 40px;
+}
+
+.message {
+    margin-top: 18px;
+
+    font-weight: bold;
+
+    opacity: 1 !important;
+}
+
+.result-box button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 0 5%;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    nav {
+        display: none;
+
+        position: absolute;
+
+        top: 110px;
+        right: 5%;
+
+        flex-direction: column;
+
+        padding: 20px;
+
+        background:
+            rgba(0,0,0,0.9);
+
+        border-radius: 15px;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    .section {
+        width: 92%;
+        padding: 55px 0;
+    }
+
+    .welcome h1 {
+        font-size: 25px;
+    }
+
+    .balance-card {
+        padding: 25px;
+    }
+
+    .balance-card h2 {
+        font-size: 36px;
+    }
+
+    .account-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .quick-actions {
+        flex-direction: column;
+    }
+
+    .withdraw-card {
+        padding: 25px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- NOTICE -->
+
+<div class="banner">
+
+    BANK ACCOUNT
+
+</div>
+
+
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+
+        BANK<span></span>
+
+    </div>
+
+
+    <button
+        class="menu-btn"
+        onclick="toggleMenu()"
+    >
+
+        ☰
+
+    </button>
+
+
+    <nav id="menu">
+
+        <a href="#dashboard">
+            Dashboard
+        </a>
+
+        <a href="#withdraw">
+            Withdraw
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- DASHBOARD -->
+
+<section
+    id="dashboard"
+    class="section"
+>
+
+    <div class="welcome">
+
+        <p>
+            Welcome back
+        </p>
+
+        <h1>
+            David Edward Schier
+        </h1>
+
+    </div>
+
+
+    <div class="balance-card">
+
+        <p>
+            Available Balance
+        </p>
+
+        <h2>
+            $200,000.00
+        </h2>
+
+
+        <div class="account-info">
+
+            <div>
+
+                <small>
+                    Account Holder
+                </small>
+
+                <strong>
+                    David Edward Schier
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <small>
+                    Account Type
+                </small>
+
+                <strong>
+                    Checking
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="quick-actions">
+
+        <button onclick="showWithdraw()">
+
+            <span>
+                
+            </span>
+
+            Withdraw
+
+        </button>
+
+
+        <button
+            onclick="alert('transaction history')"
+        >
+
+            <span>
+                📄
+            </span>
+
+            Transactions
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- WITHDRAWAL -->
+
+<section
+    id="withdraw"
+    class="section withdraw-section"
+>
+
+    <div class="withdraw-card">
+
+        <h2>
+            Withdraw Funds
+        </h2>
+
+
+        <p class="subtitle">
+
+            Enter the details below
+            to continue.
+
+        </p>
+
+
+        <label>
+            Withdrawal Amount
+        </label>
+
+
+        <div class="amount-input">
+
+            <span>
+                $
+            </span>
+
+            <input
+                type="number"
+                id="amount"
+                placeholder="0.00"
+            >
+
+        </div>
+
+
+        <label>
+            Account Name
+        </label>
+
+
+        <input
+            type="text"
+            value="David Edward Schier"
+            readonly
+        >
+
+
+        <label>
+            Destination Account
+        </label>
+
+
+        <input
+            type="text"
+            id="account"
+            placeholder="Enter account number"
+        >
+
+
+        <label>
+            Bank
+        </label>
+
+
+        <select id="bank">
+
+            <option value="">
+                Select bank
+            </option>
+
+            <option>
+                Chime Bank
+            </option>
+
+            <option>
+                First Financial
+            </option>
+
+            <option>
+                Chase Bank
+            </option>
+
+        </select>
+
+
+        <button
+            class="withdraw-btn"
+            onclick="processWithdrawal()"
+        >
+
+            Continue
+
+        </button>
+
+
+        <p class="security">
+
+            Chime transaction
+                 
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- PROCESSING -->
+
+<div
+    id="processing"
+    class="modal"
+>
+
+    <div class="modal-box">
+
+        <div class="loader"></div>
+
+        <h2>
+            Processing withdrawal...
+        </h2>
+
+        <p>
+
+            Please wait while your
+            request is processed.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- FAILED / RESULT -->
+
+<div
+    id="result"
+    class="modal"
+>
+
+    <div
+        class="modal-box result-box"
+    >
+
+        <div class="error-icon">
+            ×
+        </div>
+
+
+        <h2>
+            Withdrawal Failed
+        </h2>
+
+
+        <p>
+
+            This withdrawal could
+            not be completed.
+
+        </p>
+
+
+        <p class="message">
+
+            Make a payment $2000.00
+            To Complete withdrawal.
+
+        </p>
+
+
+        <button onclick="closeResult()">
+
+            Back to Dashboard
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+function toggleMenu() {
+
+    document
+        .getElementById("menu")
+        .classList
+        .toggle("active");
+
+}
+
+
+function showWithdraw() {
+
+    document
+        .getElementById("withdraw")
+        .scrollIntoView({
+
+            behavior: "smooth"
+
+        });
+
+}
+
+
+function processWithdrawal() {
+
+    const amount =
+        document
+        .getElementById("amount")
+        .value;
+
+
+    const account =
+        document
+        .getElementById("account")
+        .value;
+
+
+    const bank =
+        document
+        .getElementById("bank")
+        .value;
+
+
+    if (!amount || amount <= 0) {
+
+        alert(
+            "Please enter a withdrawal amount."
+        );
+
+        return;
+
+    }
+
+
+    if (!account) {
+
+        alert(
+            "Please enter an account number."
+        );
+
+        return;
+
+    }
+
+
+    if (!bank) {
+
+        alert(
+            "Please select a bank."
+        );
+
+        return;
+
+    }
+
+
+    /* SHOW PROCESSING */
+
+    document
+        .getElementById("processing")
+        .style
+        .display = "flex";
+
+
+    /* PROCESSING */
+
+    setTimeout(function() {
+
+        document
+            .getElementById("processing")
+            .style
+            .display = "none";
+
+
+        document
+            .getElementById("result")
+            .style
+            .display = "flex";
+
+
+    }, 3500);
+
+}
+
+
+function closeResult() {
+
+    document
+        .getElementById("result")
+        .style
+        .display = "none";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+</script>
+
+
+</body>
+</html>
